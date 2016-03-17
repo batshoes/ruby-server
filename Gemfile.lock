@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/batshoes/baublebar.git
+  revision: ad225cce90fff2e6751bf3626bb5db48d8bd3fc8
+  specs:
+    baublebar (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -74,6 +80,7 @@ GEM
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     rack (1.6.4)
+    rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.5)
@@ -141,10 +148,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  baublebar!
   byebug
   coffee-rails (~> 4.1.0)
   jbuilder (~> 2.0)
   jquery-rails
+  rack-cors
   rails (= 4.2.5)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
