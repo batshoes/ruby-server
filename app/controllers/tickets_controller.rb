@@ -1,21 +1,13 @@
 require 'rest_client'
-# require 'baublebar'
 class TicketsController < ApplicationController
-  
-  # include Baublebar
 
   def index
     set_response_headers
     set_client
-
-    @tickets = JSON.parse(@ticket_client.get_tickets(@email))
+    @tickets = @ticket_client.get_tickets(@email)
     set_params
     update_visitor
   end
-
-  
-
-  
 
 private
 
@@ -39,18 +31,20 @@ private
   end
 
   def set_params
-    @values = "{
+    @values = {
       'note_update_method': 'append',
-      'custom_attributes': {[
-        #{@tickets}
-      ]}
-    }"
+      'custom_attributes': {
+        "Ticket 1": "#{@tickets[0]["zendesk_url"]}",
+        "Ticket 2": "#{@tickets[1]["zendesk_url"]}",
+        "Ticket 3": "#{@tickets[2]["zendesk_url"]}",
+      }
+    }
 
-    @headers = "{
-      authorization: '#{@auth}',
+    @headers = {
+      authorization: "#{@auth}",
       accept: 'application/vnd.salemove.v1+json',
-      x_salemove_visit_session_id: '#{@session}'
-    }"
+      x_salemove_visit_session_id: "#{@session}"
+    }
   end
 
 end
