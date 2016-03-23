@@ -8,10 +8,7 @@ class TicketsController < ApplicationController
     set_response_headers
     set_client
 
-    @tickets = @ticket_client.get_tickets(@email)
-    puts "@@@@"
-    puts @tickets
-    puts "!@!!!"
+    @tickets = JSON.parse(@ticket_client.get_tickets(@email))
     set_params
     update_visitor
   end
@@ -44,9 +41,9 @@ private
   def set_params
     @values = "{
       'note_update_method': 'append',
-      'custom_attributes': {
-        '#{@tickets}'
-      }
+      'custom_attributes': {[
+        #{@tickets}
+      ]}
     }"
 
     @headers = "{
