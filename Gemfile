@@ -32,12 +32,14 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Used to handle CORS request without using JSONP
 gem 'rack-cors', :require => 'rack/cors'
-gem 'baublebar', github: 'batshoes/baublebar'
-
+gem 'baublebar', github: 'batshoes/baublebar', branch: 'TESTER'
+gem 'rest-client'
+gem 'zendesk_api'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'pry'
 end
 
 group :development do

@@ -1,8 +1,6 @@
 class HomeController < ApplicationController
   def index
-    
-    # @tickets = BaubleBar::GetZenDeskTickets.new(email_params)
-    
+        
   end
 
 
