@@ -15,9 +15,9 @@ private
     @ticket_client = ::Baublebar::GetZenDeskTickets.new
 
     @email = params[:email]
-    @auth = params[:Authorization]
-    @accept = params[:Accept]
-    @session = params[:Session]
+    @auth = params[:authorization]
+    @accept = params[:accept]
+    @session = params[:session]
   end
 
   def set_response_headers
