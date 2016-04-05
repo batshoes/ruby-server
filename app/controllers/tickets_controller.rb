@@ -8,7 +8,7 @@ class TicketsController < ApplicationController
     set_params
     update_visitor
   end
-
+    
 private
 
   def set_client
