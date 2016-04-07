@@ -1,28 +1,31 @@
 require 'rest_client'
+
 class TicketsController < ApplicationController
 
   def index
     set_response_headers
-    set_client
+    set_client   
     @tickets = @ticket_client.get_tickets(@email)
-    set_params
-    update_visitor
+    if @tickets.kind_of? Array
+      set_params
+      update_visitor
+    end
   end
-
+    
 private
 
   def set_client
     @ticket_client = ::Baublebar::GetZenDeskTickets.new
 
     @email = params[:email]
-    @auth = params[:Authorization]
-    @accept = params[:Accept]
-    @session = params[:Session]
+    @auth = params[:authorization]
+    @accept = params[:accept]
+    @session = params[:session]
   end
 
   def set_response_headers
     response.headers['Access-Control-Allow-Origin'] = "http://www.salemove.com"
-    response.headers['Access-Control-Allow-Credentials'] = "true"
+    response.headers['Access-Control-Allow-Credentials'] = true
   end
 
   def update_visitor
