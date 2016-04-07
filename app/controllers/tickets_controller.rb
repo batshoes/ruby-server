@@ -31,6 +31,7 @@ private
   def update_visitor
     response = RestClient.post 'https://api.salemove.com/visitor', @values, @headers
     puts response
+    puts "this is working"
   end
 
   def set_params
