@@ -1,12 +1,15 @@
 require 'rest_client'
+
 class TicketsController < ApplicationController
 
   def index
     set_response_headers
-    set_client
+    set_client   
     @tickets = @ticket_client.get_tickets(@email)
-    set_params
-    update_visitor
+    if @tickets.kind_of? Array
+      set_params
+      update_visitor
+    end
   end
     
 private
@@ -22,7 +25,7 @@ private
 
   def set_response_headers
     response.headers['Access-Control-Allow-Origin'] = "http://www.salemove.com"
-    response.headers['Access-Control-Allow-Credentials'] = "true"
+    response.headers['Access-Control-Allow-Credentials'] = true
   end
 
   def update_visitor

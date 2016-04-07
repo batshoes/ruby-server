@@ -1,7 +1,6 @@
 GIT
   remote: git://github.com/batshoes/baublebar.git
-  revision: d1122f2b5f3eaf629a05c6743170a236c6deb7d9
-  branch: TESTER
+  revision: 6545c3b6e1b80f435ab228019dcd271e1473f65c
   specs:
     baublebar (0.1.0)
 
