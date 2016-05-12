@@ -26,6 +26,7 @@ private
   def set_response_headers
     response.headers['Access-Control-Allow-Origin'] = "http://www.salemove.com"
     response.headers['Access-Control-Allow-Credentials'] = true
+    puts "headers set"
   end
 
   def update_visitor
