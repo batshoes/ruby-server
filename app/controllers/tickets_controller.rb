@@ -1,5 +1,3 @@
-require 'rest_client'
-
 class TicketsController < ApplicationController
 
   def index
