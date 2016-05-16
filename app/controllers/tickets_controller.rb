@@ -39,11 +39,11 @@ private
 
   def set_params
     @values = {
-      'note_update_method': 'append',
-      'custom_attributes': {
-        "Ticket 1": "#{@tickets[0]["zendesk_url"]}",
-        "Ticket 2": "#{@tickets[1]["zendesk_url"]}",
-        "Ticket 3": "#{@tickets[2]["zendesk_url"]}",
+      note_update_method: 'append',
+      custom_attributes: {
+        ticket_1: "#{@tickets[0]["zendesk_url"]}",
+        ticket_2: "#{@tickets[1]["zendesk_url"]}",
+        ticket_3: "#{@tickets[2]["zendesk_url"]}",
       }
     }
 
