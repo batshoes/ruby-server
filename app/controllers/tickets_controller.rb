@@ -11,6 +11,8 @@ class TicketsController < ApplicationController
       response.status = 204
       return response
     end
+    rescue NoMethodError
+      p "Sorry this won't work"
   end
     
 private
@@ -27,20 +29,19 @@ private
   def set_response_headers
     response.headers['Access-Control-Allow-Origin'] = "http://www.salemove.com"
     response.headers['Access-Control-Allow-Credentials'] = true
-    puts "headers set"
   end
 
   def update_visitor
     response =  RestClient.post 'https://api.salemove.com/visitor', @values, @headers
     puts response
-    puts "this is working"
   end
 
   def set_params
     ticket_attributes = {}
     ticket_number = 1
     @tickets.each do |t|
-      ticket_attributes["#{ticket_number}"] = t["zendesk_url"]
+      ref = "<a href='#{t["zendesk_url"]}'>#{t["id"]}</a>"
+      ticket_attributes["ZenDeskTicket#{ticket_number}"] = ref
       ticket_number += 1
     end
 
