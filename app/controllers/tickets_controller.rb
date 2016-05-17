@@ -1,6 +1,8 @@
 class TicketsController < ApplicationController
 
-  def index
+  before_filter :zendesk
+  
+  def zendesk
     set_response_headers
     set_client   
     @tickets = @ticket_client.get_tickets(@email)
@@ -12,7 +14,7 @@ class TicketsController < ApplicationController
       return response
     end
     rescue NoMethodError
-      p "Sorry this won't work"
+      p "Accessing the server directly will not update the user."
   end
     
 private
