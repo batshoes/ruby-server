@@ -31,7 +31,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 # Used to handle CORS request without using JSONP
-# gem 'rack-cors', :require => 'rack/cors'
+gem 'rack-cors', :require => 'rack/cors'
 gem 'baublebar', github: 'batshoes/baublebar'
 gem 'rest-client'
 gem 'zendesk_api'
