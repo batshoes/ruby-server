@@ -31,14 +31,12 @@ private
   end
 
   def update_visitor
-    binding.pry
     response =  RestClient.post 'https://api.salemove.com/visitor', @values, @headers
     puts response
     puts "this is working"
   end
 
   def set_params
-    binding.pry
     ticket_attributes = {}
     ticket_number = 1
     @tickets.each do |t|
