@@ -7,6 +7,9 @@ class TicketsController < ApplicationController
     if @tickets.kind_of? Array
       set_params
       update_visitor
+    else
+      response.status = 204
+      return response
     end
   end
     
