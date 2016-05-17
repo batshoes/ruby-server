@@ -28,21 +28,24 @@ private
   end
 
   def update_visitor
-    response =  RestClient.post 'https://api.salemove.com/visitor',
-                                @values,
-                                @headers
+    binding.pry
+    response =  RestClient.post 'https://api.salemove.com/visitor', @values, @headers
     puts response
     puts "this is working"
   end
 
   def set_params
+    binding.pry
+    ticket_attributes = {}
+    ticket_number = 1
+    @tickets.each do |t|
+      ticket_attributes["#{ticket_number}"] = t["zendesk_url"]
+      ticket_number += 1
+    end
+
     @values = {
       note_update_method: 'append',
-      custom_attributes: {
-        ticket_1: "#{@tickets[0]["zendesk_url"]}",
-        ticket_2: "#{@tickets[1]["zendesk_url"]}",
-        ticket_3: "#{@tickets[2]["zendesk_url"]}",
-      }
+      custom_attributes: ticket_attributes
     }
 
     @headers = {
