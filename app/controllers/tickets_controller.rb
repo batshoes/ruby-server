@@ -1,15 +1,20 @@
-require 'rest_client'
-
 class TicketsController < ApplicationController
 
-  def index
+  before_filter :zendesk
+  
+  def zendesk
     set_response_headers
     set_client   
     @tickets = @ticket_client.get_tickets(@email)
     if @tickets.kind_of? Array
       set_params
       update_visitor
+    else
+      response.status = 204
+      return response
     end
+    rescue NoMethodError
+      p "Accessing the server directly will not update the user."
   end
     
 private
@@ -29,18 +34,21 @@ private
   end
 
   def update_visitor
-    response = RestClient.post 'https://api.salemove.com/visitor', @values, @headers
+    response =  RestClient.post 'https://api.salemove.com/visitor', @values, @headers
     puts response
   end
 
   def set_params
+    ticket_attributes = {}
+    ticket_number = 1
+    @tickets.each do |t|
+      ticket_attributes["ZenDeskTicket#{ticket_number}"] = t["zendesk_url"]
+      ticket_number += 1
+    end
+
     @values = {
-      'note_update_method': 'append',
-      'custom_attributes': {
-        "Ticket 1": "#{@tickets[0]["zendesk_url"]}",
-        "Ticket 2": "#{@tickets[1]["zendesk_url"]}",
-        "Ticket 3": "#{@tickets[2]["zendesk_url"]}",
-      }
+      note_update_method: 'append',
+      custom_attributes: ticket_attributes
     }
 
     @headers = {
