@@ -40,8 +40,7 @@ private
     ticket_attributes = {}
     ticket_number = 1
     @tickets.each do |t|
-      ref = "<a href='#{t["zendesk_url"]}'>#{t["id"]}</a>"
-      ticket_attributes["ZenDeskTicket#{ticket_number}"] = ref.html_safe
+      ticket_attributes["ZenDeskTicket#{ticket_number}"] = t["zendesk_url"]
       ticket_number += 1
     end
 
