@@ -42,7 +42,9 @@ private
     ticket_attributes = {}
     ticket_number = 1
     @tickets.each do |t|
-      ticket_attributes["ZenDeskTicket#{ticket_number}"] = t["zendesk_url"]
+      
+      ticket_attributes["ZenDeskTicket#{ticket_number}"] = t["status"] + ": " + t["zendesk_url"]
+
       ticket_number += 1
     end
 
