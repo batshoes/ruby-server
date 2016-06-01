@@ -4,6 +4,7 @@ class TicketsController < ApplicationController
   
   def zendesk
     set_response_headers
+    check_email(@email)
     set_client   
     @tickets = @ticket_client.get_tickets(@email)
     if @tickets.kind_of? Array
@@ -26,6 +27,16 @@ private
     @auth = params[:authorization]
     @accept = params[:accept]
     @session = params[:session]
+  end
+
+  def check_email(email)
+    regex = /\S+@\S+[\.][0-9a-z]+/
+    stripped = strip_tags(email)
+    test = regex.match stripped
+    unless test
+      response.status = 401
+      return response
+    end
   end
 
   def set_response_headers

@@ -202,6 +202,7 @@ DEPENDENCIES
   pry
   rack-cors
   rails (= 4.2.5)
+  rails-html-sanitizer
   rest-client
   rspec
   sass-rails (~> 5.0)
