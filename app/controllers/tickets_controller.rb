@@ -4,6 +4,7 @@ class TicketsController < ApplicationController
   
   def zendesk
     set_response_headers
+    check_email(@email)
     set_client   
     @tickets = @ticket_client.get_tickets(@email)
     if @tickets.kind_of? Array
@@ -28,6 +29,16 @@ private
     @session = params[:session]
   end
 
+  def check_email(email)
+    regex = /\S+@\S+[\.][0-9a-z]+/
+    stripped = strip_tags(email)
+    test = regex.match stripped
+    unless test
+      response.status = 401
+      return response
+    end
+  end
+
   def set_response_headers
     response.headers['Access-Control-Allow-Origin'] = "http://www.salemove.com"
     response.headers['Access-Control-Allow-Credentials'] = true
@@ -42,7 +53,9 @@ private
     ticket_attributes = {}
     ticket_number = 1
     @tickets.each do |t|
-      ticket_attributes["ZenDeskTicket#{ticket_number}"] = t["zendesk_url"]
+      
+      ticket_attributes["Ticket: #{ticket_number}"] = t["status"] + ": " + t["zendesk_url"]
+
       ticket_number += 1
     end
 
